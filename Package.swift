@@ -31,19 +31,23 @@ let package = Package(
         .package(url: "https://github.com/swift-server/async-http-client.git", .upToNextMajor(from: "1.2.0")),
     ],
     targets: [
-        .target(name: "SotoCore", dependencies: [
-            .byName(name: "SotoSignerV4"),
-            .byName(name: "SotoXML"),
-            .byName(name: "INIParser"),
-            .product(name: "Logging", package: "swift-log"),
-            .product(name: "AsyncHTTPClient", package: "async-http-client"),
-            .product(name: "Metrics", package: "swift-metrics"),
-            .product(name: "NIO", package: "swift-nio"),
-            .product(name: "NIOHTTP1", package: "swift-nio"),
-            .product(name: "NIOSSL", package: "swift-nio-ssl"),
-            .product(name: "NIOTransportServices", package: "swift-nio-transport-services"),
-            .product(name: "NIOFoundationCompat", package: "swift-nio"),
-        ]),
+        .target(
+            name: "SotoCore",
+            dependencies: [
+                .byName(name: "SotoSignerV4"),
+                .byName(name: "SotoXML"),
+                .byName(name: "INIParser"),
+                .product(name: "Logging", package: "swift-log"),
+                .product(name: "AsyncHTTPClient", package: "async-http-client"),
+                .product(name: "Metrics", package: "swift-metrics"),
+                .product(name: "NIO", package: "swift-nio"),
+                .product(name: "NIOHTTP1", package: "swift-nio"),
+                .product(name: "NIOSSL", package: "swift-nio-ssl"),
+                .product(name: "NIOTransportServices", package: "swift-nio-transport-services"),
+                .product(name: "NIOFoundationCompat", package: "swift-nio"),
+            ],
+            swiftSettings: [.unsafeFlags(["-Xfrontend", "-enable-experimental-concurrency"])]
+        ),
         .target(name: "SotoCrypto", dependencies: []),
         .target(name: "SotoSignerV4", dependencies: [
             .byName(name: "SotoCrypto"),
