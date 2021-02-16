@@ -578,7 +578,7 @@ extension AWSClient {
 
 // invoker
 extension AWSClient {
-    fileprivate func invoke<Output>(
+    func invoke<Output>(
         with serviceConfig: AWSServiceConfig,
         eventLoop: EventLoop,
         logger: Logger,
